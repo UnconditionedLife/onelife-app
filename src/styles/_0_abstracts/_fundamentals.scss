@@ -24,7 +24,8 @@ $color-palette: (
 	'blue':			(regular: #1cafcb),
 	'azure':		(light: #8ebef1, regular: #418ee0, dark: #3e7bbd, darker: #2d4e72),
 	'red':			(regular: #fb6363, dark: #d0021b, darker:#af0c20, darkest:#af0c20),
-	'orange':		(lighter: #FFCC33, light: #ffb347, regular:#fda425)
+	'orange':		(lighter: #FFCC33, light: #ffb347, regular:#fda425),
+	'purple':		(light: #6d3d6d, regular: #4c2a4c)
 );
 
 @function _color-value($palette, $name, $hue:regular) {

@@ -49,8 +49,8 @@
 	) !default;
 
 	$brand-colors-background: (
-		'background-primary':	(regular: _base-color-value('white', dark)),
-		'background-secondary':	(regular: _base-color-value('white')),
+		'background-primary':	(regular: _base-color-value('purple')),
+		'background-secondary':	(regular: _base-color-value('purple', light)),
 		'background-tertiary':	(regular: _base-color-value('grey', dark)),
 		'background-highlight':	(regular: rgba(_color-value($brand-colors, secondary), 0.1)),
 		'background-layer':		(regular: rgba(_base-color-value('black'), 0.26)),
