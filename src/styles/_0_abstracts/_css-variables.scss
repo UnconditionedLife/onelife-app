@@ -1,0 +1,25 @@
+:root {
+	@each $color-name, $color-values in $color-palette {
+		@each $hue-name, $hue-value in $color-values {
+			#{build-var-name($color-name, $hue-name)}: color($color-name, $hue-name);
+		}
+	}
+
+	@each $color-name, $color-values in $event-color-palette {
+		@each $hue-name, $hue-value in $color-values {
+			#{build-var-name($color-name, $hue-name)}: color($color-name, $hue-name);
+		}
+	}
+
+	@each $color-name, $color-values in $brand-colors {
+		@each $hue-name, $hue-value in $color-values {
+			#{build-var-name($color-name, $hue-name)}: color($color-name, $hue-name);
+		}
+	}
+
+	@each $color-name, $color-values in $brand-colors-background {
+		@each $hue-name, $hue-value in $color-values {
+			#{build-var-name($color-name, $hue-name)}: color($color-name, $hue-name);
+		}
+	}
+}

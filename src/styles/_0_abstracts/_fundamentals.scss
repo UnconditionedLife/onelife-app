@@ -1,0 +1,49 @@
+// Spacers
+$spacer-0: 0px;
+$spacer-1: 4px;
+$spacer-2: 8px;
+$spacer-3: 16px;
+$spacer-4: 20px;
+$spacer-5: 24px;
+$spacer-6: 32px;
+$spacer-7: 40px;
+$spacer-8: 48px;
+$spacer-9: 56px;
+$spacer-10: 70px;
+
+$color-palette: (
+	'inherit':		(regular: 'inherit'),
+	'transparent':	(regular: 'transparent'),
+	'black':		(regular: #303030),
+	'grey':			(light: #ddd, regular: #909090, dark: #606060),
+	'white':		(regular: #fff, dark: #fafafb, darker: #f4f4f4),
+	'green':		(regular: #16a74e, dark: #1e8345, darker: #236a3f),
+	'emerald':		(lighter: #8aebb7, light: #8ecaab, regular: #41b285, dark: #46886d, darker: #436c5c),
+	'aqua':			(light: #daeee6, regular: #44ae9d, dark: #3c998a, darker: #3b8e81),
+	'geco-green':	(regular: #79c143),
+	'blue':			(regular: #1cafcb),
+	'azure':		(light: #8ebef1, regular: #418ee0, dark: #3e7bbd, darker: #2d4e72),
+	'red':			(regular: #fb6363, dark: #d0021b, darker:#af0c20, darkest:#af0c20),
+	'orange':		(lighter: #FFCC33, light: #ffb347, regular:#fda425)
+);
+
+@function _color-value($palette, $name, $hue:regular) {
+	$color: map-get($palette, quote($name));
+	@if $color == null {
+		// @warn "Unknown color `#{$name}` in color palette `#{$palette}`.";
+		@return null;
+	}
+
+	$value: map-get($color, quote($hue));
+	@if $value == null {
+		// @warn "Unknown hue `#{$value}` of `#{$color}` in color palette `#{$palette}`.";
+		@return null;
+	}
+
+	@return $value;
+}
+
+@function _base-color-value($name, $hue:regular) {
+	$val: _color-value($color-palette, $name, $hue);
+	@return $val;
+}

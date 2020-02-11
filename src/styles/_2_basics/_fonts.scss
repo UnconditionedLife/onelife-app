@@ -1,0 +1,8 @@
+// FONTS SETUP
+@import '../_1_resources/fonts/Montserrat/_montserrat-font.scss';
+
+body{
+	font-family: $font-family-primary, $font-family-secondary;
+	@include font(body);
+	@include color(text);
+}

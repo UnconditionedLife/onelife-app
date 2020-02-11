@@ -1,0 +1,48 @@
+*{
+	-webkit-backface-visibility:hidden;
+	-webkit-tap-highlight-color:transparent;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0;
+}
+hr {
+	margin: 0;
+	border: none;
+}
+ul,
+li {
+	margin: 0;
+	padding: 0;
+	list-style-position: inside;
+}
+
+figure {
+	margin: 0;
+}
+
+button {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+	color: inherit;
+}
+
+img {
+	image-orientation: from-image;
+
+	&:not(.cke_widget_element) {
+		max-width: 100%;
+	}
+}

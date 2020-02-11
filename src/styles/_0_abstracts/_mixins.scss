@@ -1,0 +1,407 @@
+// Global Mixins //
+
+@import './_utils.scss';
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	// Breakpoints & Media Queries
+	@mixin respond-to($breakpoint) {
+		$value: map-get($breakpoints, $breakpoint);
+
+		@if $value != null {
+			// Prints a media query based on the value
+			@media (max-width: $value) {
+			@content;
+			}
+		} @else {
+			@error "Unknown breakpoint value `#{$breakpoint}`.";
+		}
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	/// Mixin printing a linear-gradient
+	/// as well as a plain color fallback
+	/// and the `-webkit-` prefixed declaration
+	/// @access public
+	/// @param {String | List | Angle} $direction - Linear gradient direction
+	/// @param {Arglist} $color-stops - List of color-stops composing the gradient
+	@mixin linear-gradient($direction, $color-stops...) {
+		@if is-direction($direction) == false {
+			$new-color-stops: ();
+			$new-color-stops: append($new-color-stops, ($direction));
+			@each $stop in $color-stops {
+				$new-color-stops: append($new-color-stops, ($stop));
+			}
+			$color-stops: $new-color-stops;
+			$direction: 180deg;
+		}
+
+		$static-color-stops: ();
+		$var-color-stops: ();
+		@each $color, $stop in $color-stops {
+			$cur-color: $color;
+			$cur-hue: regular;
+			@if length($color) > 1 {
+				$cur-color: nth($color, 1);
+				$cur-hue: nth($color, 2);
+			}
+			$static-color-stops: append($static-color-stops, (color($cur-color, $cur-hue) $stop), comma);
+			$var-color-stops: append($var-color-stops, (var(#{build-var-name($cur-color, $cur-hue)}) $stop), comma);
+		}
+
+		background: nth(nth($static-color-stops, 1), 1);
+		background: nth(nth($var-color-stops, 1), 1);
+		background: -webkit-linear-gradient(legacy-direction($direction), $static-color-stops);
+		background: -webkit-linear-gradient(legacy-direction($direction), $var-color-stops);
+		background: linear-gradient($direction, $static-color-stops);
+		background: linear-gradient($direction, $var-color-stops);
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	// z-index management
+	@mixin z-index($key) {
+		$value: map-get($z-layers, $key);
+
+		@if $value != null {
+			z-index: $value;
+		} @else {
+			@error "Unknown `#{$key}` in $z-layers.";
+		}
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	/// Centralized font management
+	@mixin font($key, $weight: null, $line-height: null, $family:null) {
+		$computed-size: 0;
+		$computed-weight: 400;
+		$computed-style: normal;
+		$computed-line-height: 0;
+		$computed-font-family: null;
+
+		@if $key == 'caption-small' {
+			$computed-size: $font-size-caption-small;
+			$computed-weight: $font-weight-semibold;
+			$computed-line-height: $font-line-height-small;
+		} @else if $key == 'caption' {
+			$computed-size: $font-size-caption;
+			$computed-weight: $font-weight-semibold;
+			$computed-line-height: $font-line-height-small;
+		} @else if $key == 'body-small' {
+			$computed-size: $font-size-body-small;
+			$computed-weight: $font-weight-regular;
+			$computed-line-height: $font-line-height-small;
+		} @else if $key == 'body' {
+			$computed-size: $font-size-body;
+			$computed-weight: $font-weight-regular;
+			$computed-line-height: $font-line-height-large;
+		} @else if $key == 'subheading' {
+			$computed-size: $font-size-subheading;
+			$computed-weight: $font-weight-semibold;
+			$computed-line-height: $font-line-height-small;
+		} @else if $key == 'heading-small' {
+			$computed-size: $font-size-heading-small;
+			$computed-weight: $font-weight-semibold;
+			$computed-line-height: $font-line-height-unit;
+		} @else if $key == 'heading-medium' {
+			$computed-size: $font-size-heading-medium;
+			$computed-weight: $font-weight-semibold;
+			$computed-line-height: $font-line-height-unit;
+		} @else if $key == 'heading-large' {
+			$computed-size: $font-size-heading-large;
+			$computed-weight: $font-weight-bold;
+			$computed-line-height: $font-line-height-unit;
+		} @else if $key == 'heading-huge' {
+			$computed-size: $font-size-heading-huge;
+			$computed-weight: $font-weight-bold;
+			$computed-line-height: $font-line-height-unit;
+		} @else {
+			@error "Unknown font: #{$key}";
+		}
+
+		@if $weight != null {
+			@if $weight == 'regular' {
+				$computed-weight: $font-weight-regular;
+			} @else if $weight == 'semibold' {
+				$computed-weight: $font-weight-semibold;
+			} @else if $weight == 'bold' {
+				$computed-weight: $font-weight-bold;
+			} @else {
+				@error "Unknown font-weight: #{$weight}";
+			}
+		}
+
+		@if $line-height != null {
+			@if $line-height == 'unit' {
+				$computed-line-height: $font-line-height-unit;
+			} @else if $line-height == 'small' {
+				$computed-line-height: $font-line-height-small;
+			} @else if $line-height == 'medium' {
+				$computed-line-height: $font-line-height-medium;
+			} @else if $line-height == 'large' {
+				$computed-line-height: $font-line-height-large;
+			} @else {
+				@error "Unknown font-size: #{$line-height}";
+			}
+		}
+
+		@if $family != null {
+			@if $family == 'primary' {
+				$computed-font-family: $font-family-primary;
+			} @else if $family == 'secondary' {
+				$computed-font-family: $font-family-secondary;
+			} @else if $family == 'icon' {
+				$computed-font-family: $font-family-icon;
+			} @else {
+				@error "Unknown font-family: #{$family}";
+			}
+		}
+
+		@if $computed-font-family != null {
+			font-family: $computed-font-family;
+		}
+
+		font-size: $computed-size;
+		font-weight: $computed-weight;
+		line-height: $computed-line-height;
+	}
+
+	@mixin font-weight($key) {
+		$computed-weight: null;
+
+		@if $key == 'regular' {
+			$computed-weight: $font-weight-regular;
+		} @else if $key == 'semibold' {
+			$computed-weight: $font-weight-semibold;
+		} @else if $key == 'bold' {
+			$computed-weight: $font-weight-bold;
+		} @else {
+			@error "Unknown font weight: #{$key}";
+		}
+
+		font-weight: $computed-weight;
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@function transition($property, $duration, $timing-function) {
+		$computed-duration: 0s;
+		$computed-timing-function: ease;
+
+		@if $duration == 'fast' {
+			$computed-duration: $transition-duration-fast;
+		} @else if $duration == 'medium' {
+			$computed-duration: $transition-duration-medium;
+		} @else {
+			@error "Unknown duration: #{$duration}";
+		}
+
+		@if $timing-function == 'ease-in' {
+			$computed-timing-function: $transition-timing-function-ease-in;
+		} @else if $timing-function == 'ease-out' {
+			$computed-timing-function: $transition-timing-function-ease-out;
+		} @else {
+			@error "Unknown timing function: #{$timing-function}";
+		}
+
+		@return $property + ' ' + $computed-duration + ' ' + $computed-timing-function;
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@mixin color($name, $hue:regular) {
+		color: color($name, $hue);
+		color: var(#{build-var-name($name, $hue)});
+	}
+
+	@mixin background-color($name, $hue:regular) {
+		background-color: color($name, $hue);
+		background-color: var(#{build-var-name($name, $hue)});
+	}
+
+	@mixin background($name, $hue:regular) {
+		background: color($name, $hue);
+		background: var(#{build-var-name($name, $hue)});
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@mixin border($size, $type, $color, $hue:regular) {
+		border: $size $type color($color, $hue);
+		border-color: var(#{build-var-name($color, $hue)});
+	}
+
+	@mixin border-side($position, $size, $type, $color, $hue:regular) {
+		border-#{$position}: $size $type color($color, $hue);
+		border-#{$position}-color: var(#{build-var-name($color, $hue)});
+	}
+
+	@mixin border-color($name, $hue:regular) {
+		border-color: color($name, $hue);
+		border-color: var(#{build-var-name($name, $hue)});
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@mixin outline($size, $type, $color, $hue:regular) {
+		outline: $size $type color($color, $hue);
+		outline-color: var(#{build-var-name($color, $hue)});
+	}
+
+	@mixin outline-color($name, $hue:regular) {
+		outline-color: color($name, $hue);
+		outline-color: var(#{build-var-name($name, $hue)});
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@mixin box-shadow($offset-x, $offset-y, $blur-radius, $color, $hue:regular) {
+		box-shadow: $offset-x $offset-y $blur-radius color($color, $hue);
+		box-shadow: $offset-x $offset-y $blur-radius var(#{build-var-name($color, $hue)})
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@mixin user-select($value) {
+		-webkit-user-select: $value;
+		   -moz-user-select: $value;
+			-ms-user-select: $value;
+				user-select: $value;
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@mixin flex($value, $display:block) {
+		@if $display == 'block' {
+			display: flex;
+		} @else if $display == 'inline' {
+			display: inline-flex;
+		} @else {
+			@error "Unknown value: #{$display}";
+		}
+
+		@if $value == 'center' {
+			align-items: center;
+			justify-content: center;
+		} @else if $value == 'center-horizontal' {
+			justify-content: center;
+		} @else if $value == 'center-vertical' {
+			align-items: center;
+		} @else if $value == 'right' {
+			justify-content: flex-end;
+		} @else {
+			@error "Unknown value: #{$value}";
+		}
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@mixin ellipsis() {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@mixin selectable() {
+		cursor: pointer;
+
+		&:hover {
+			@include background-color(background-highlight);
+		}
+	}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// PLACEHOLDER MIXIN
+	@mixin optional-at-root($sel) {
+		@at-root #{if(not &, $sel, selector-append(&, $sel))} {
+			@content;
+		}
+	}
+
+	@mixin placeholder {
+		@include optional-at-root('::-webkit-input-placeholder') {
+			@content;
+		}
+
+		@include optional-at-root(':-moz-placeholder') {
+			@content;
+		}
+
+		@include optional-at-root('::-moz-placeholder') {
+			@content;
+		}
+
+		@include optional-at-root(':-ms-input-placeholder') {
+			@content;
+		}
+	}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// BROWSER MIXIN
+	@mixin browser($browser, $os: null, $device: null) {
+		$computed-browser: null;
+
+		@if $browser == 'safari' {
+			$computed-browser: '.' + $browser;
+		} @else if $browser == 'chrome' {
+			$computed-browser: '.' + $browser;
+		} @else if $browser == 'ff' {
+			$computed-browser: '.' + $browser;
+		} @else if $browser == 'ie11' {
+			$computed-browser: '.' + $browser;
+		} @else if $browser == 'edge' {
+			$computed-browser: '.' + $browser;
+		} @else if $browser == 'any' {
+			$computed-browser: '';
+		} @else {
+			@error "Unknown browser #{$browser}.";
+		}
+
+		@if $os != null {
+			@if $os == 'ios' {
+				$computed-browser: $computed-browser + '.' + $os;
+			} @else if $os == 'android' {
+				$computed-browser: $computed-browser + '.' + $os;
+			} @else {
+				@error "Unknown os #{$os}.";
+			}
+		}
+
+		@if $device != null {
+			@if $device == 'iphone' {
+				$computed-browser: $computed-browser + '.' + $device;
+			} @else if $device == 'ipad' {
+				$computed-browser: $computed-browser + '.' + $device;
+			} @else if $device == 'ipod' {
+				$computed-browser: $computed-browser + '.' + $device;
+			} @else {
+				@error "Unknown device #{$device}.";
+			}
+		}
+
+		@if $computed-browser != null {
+			#{$computed-browser} & {
+				@content;
+			}
+		}
+	}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// GRID MIXIN
+	@mixin grid-gutter($columns) {
+		&:nth-of-type(n) {
+			margin-right: 0;
+		}
+
+		@if $columns > 1 {
+			&:not(:nth-of-type(#{$columns}n)) {
+				margin-right: $layout-column-gutter;
+			}
+		}
+	}

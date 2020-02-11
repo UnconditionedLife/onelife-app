@@ -1,0 +1,149 @@
+// Global Variables //
+
+	// Layout Variables
+	$navbar-height: $spacer-9 !default;
+	$navbar-height-mobile: $spacer-9 !default;
+	$sidebar-width: $spacer-9 !default;
+	$header-max-width: 1920px;
+	$header-height-xxsmall: 90px;
+	$header-height-xsmall: 180px;
+	$header-height-small-temp: 160px;
+	$header-height-small: 250px;
+	$header-height-large: 340px;
+	$header-height-huge: 850px;
+
+	$layout-column-size: 70px;
+	$layout-column-gutter: 30px;
+
+	$event-color-palette: (
+		'event-azure':					(regular: #48daff),
+		'event-green-reply':			(regular: #16a74e),
+		'event-green':					(regular: #6edf59),
+		'event-orange':					(regular: #ff7d0c),
+		'event-fucsia':					(regular: #e5007b),
+		'event-red':					(regular: #ac0040),
+		'event-yellow':					(regular: #ffc500),
+		'event-blue':					(regular: #007eb1),
+		'event-ardesia':				(regular: #6a6e6f),
+		'event-bluemarine':				(regular: #70aab1),
+		'event-fluopink':				(regular: #fe5ac2),
+		'event-plum':					(regular: #8f496b),
+		'event-coral':					(regular: #f86b5a),
+		'event-tan':					(regular: #cbaa8d),
+		'event-powder-blue':			(regular: #7a97b5),
+		'event-light-steel-blue':		(regular: #cbd9eb)
+	);
+
+	$brand-colors: (
+		'primary':		(light: _base-color-value(azure, light), regular: _base-color-value(azure), dark: _base-color-value(azure, dark), darker: _base-color-value(azure, darker)),
+		'secondary':	(regular: _base-color-value(azure)),
+		'notification':	(regular: _base-color-value(red), dark: _base-color-value(red, dark), darker: _base-color-value(red, darker)),
+		'text':			(lighter:_base-color-value(grey), light:_base-color-value(grey, dark), regular: _base-color-value('black'), dark: _base-color-value('black'), darker: _base-color-value('black')),
+		'search-highlight': (regular: _base-color-value(orange, lighter)),
+		'highlight':	(regular: _base-color-value('white'), dark: _base-color-value('white', dark), darker: _base-color-value('white', darker)),
+		'error':		(regular: _base-color-value(red, dark)),
+		'disabled':		(lighter: _base-color-value('white', darker), light: _base-color-value(grey, light), regular: _base-color-value(grey, dark)),
+		'subdued':		(regular: _base-color-value(grey)),
+		'divider':		(regular: _base-color-value(grey, light), dark: _base-color-value(grey, dark)),
+		'success':		(regular: _base-color-value(green), dark: _base-color-value(green, dark), darker: _base-color-value(green, darker)),
+	) !default;
+
+	$brand-colors-background: (
+		'background-primary':	(regular: _base-color-value('white', dark)),
+		'background-secondary':	(regular: _base-color-value('white')),
+		'background-tertiary':	(regular: _base-color-value('grey', dark)),
+		'background-highlight':	(regular: rgba(_color-value($brand-colors, secondary), 0.1)),
+		'background-layer':		(regular: rgba(_base-color-value('black'), 0.26)),
+		'background-highlight-layer': (regular: rgba(_base-color-value('white'), 0.7)),
+	) !default;
+
+	// Font & Icon Variables
+	/// Tokens
+	$font-family-primary: 'Montserrat';
+	$font-family-secondary: Arial, sans-serif;
+	$font-family-icon: 'tamtamy-icon';
+
+	$font-size-caption-small: 10px;
+	$font-size-caption: 12px;
+	$font-size-body-small: 14px;
+	$font-size-body: 16px;
+	$font-size-subheading: 18px;
+	$font-size-heading-small: 24px;
+	$font-size-heading-medium: 32px;
+	$font-size-heading-large: 40px;
+	$font-size-heading-huge: 56px;
+
+	$font-weight-regular: 400;
+	$font-weight-semibold: 600;
+	$font-weight-bold: 700;
+
+	$font-line-height-unit: 1.1;
+	$font-line-height-small: 1.142;
+	$font-line-height-medium: 1.285;
+	$font-line-height-large: 1.375;
+
+	// Icons
+	$icon-size-large: 30px;
+	$icon-size-intermediate: 24px;
+	$icon-size-medium :20px;
+	$icon-size-small: 16px;
+	$icon-size-xsmall: 14px;
+
+	// Avatars
+	$avatar-size-small: 24px;
+	$avatar-size-medium: 30px;
+	$avatar-size-large: 36px;
+	$avatar-size-xlarge: 48px;
+	$avatar-size-huge: 70px;
+	$avatar-size-gargantuan: 112px;
+	$avatar-size-colossal: 140px;
+
+	// Avatars font size
+	$avatar-font-size-small: $font-size-caption;
+	$avatar-font-size-medium: $font-size-body-small;
+	$avatar-font-size-large: $font-size-body;
+	$avatar-font-size-xlarge: $font-size-heading-small;
+	$avatar-font-size-huge: $font-size-heading-medium;
+	$avatar-font-size-gargantuan: $font-size-heading-huge;
+	$avatar-font-size-colossal: 70px;
+
+	// Action button
+	$action-button-size-large: $spacer-9;
+	$action-button-size-medium: $spacer-7;
+	$tooltip-border-width: 5px;
+
+	// Carousel
+	$content-highlights-carousel-content-card-height: 90px;
+
+	// Breakpoints Map
+	$breakpoints: (
+		'mobile-slim': 370px,
+		'mobile': 520px,
+		'tablet': 768px,
+		'tablet-fat': 1024px,
+		'desktop-small': 1170px + $spacer-4, // Consider scrollbar width
+		'desktop-medium': 1280px,
+		'desktop-large': 1440px,
+	);
+
+	// z-index layers
+	$z-layers: (
+		pit:		-1,
+		default:	0,
+		flag:		1,
+		toggle:		10,
+		sub-dock:	1000,
+		docked:		1001,
+		dropdown:	1002,
+		overlay:	1003,
+		modal:		1004
+	);
+
+	// Transition variables
+	$animation-timing:.25s all cubic-bezier(0.06, 0.73, 0.59, 0.96);
+
+	$transition-duration-fast: 0.25s;
+	$transition-duration-medium: 0.4s;
+
+	$transition-timing-function-ease-in: cubic-bezier(0.06, 0.73, 0.59, 0.96);
+	$transition-timing-function-ease-out: cubic-bezier(0.59, 0.96, 0.06, 0.73);

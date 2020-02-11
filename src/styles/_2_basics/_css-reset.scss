@@ -1,0 +1,194 @@
+//! sanitize.css v7.0.3 | CC0 License | github.com/csstools/sanitize.css //
+// Document ========================================================================== //
+
+// 1. Remove repeating backgrounds in all browsers (opinionated). 
+// 2. Add border box sizing in all browsers (opinionated).
+*,
+::before,
+::after {
+	background-repeat:no-repeat;// 1 
+	box-sizing:border-box;// 2
+}
+
+// 1. Add text decoration inheritance in all browsers (opinionated). 
+// 2. Add vertical alignment inheritance in all browsers (opinionated).
+::before,
+::after {
+	text-decoration:inherit;// 1
+	vertical-align: inherit;// 2
+}
+
+// 1. Use the default cursor in all browsers (opinionated).
+// 2. Use the default user interface font in all browsers (opinionated).
+// 3. Correct the line height in all browsers.
+// 4. Use a 4-space tab width in all browsers (opinionated).
+// 5. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.
+// 6. Breaks words to prevent overflow in all browsers (opinionated). 
+html {
+	cursor:	default;// 1 
+	font-family:	system-ui,
+					-apple-system,// macOS 10.11-10.12 
+					Segoe UI,// Windows 6+
+					Roboto,// Android 4+
+					Ubuntu,// Ubuntu 10.10+ 
+					Cantarell,// Gnome 3+
+					Oxygen,// KDE Plasma 4+
+					sans-serif,// fallback
+					"Apple Color Emoji",// macOS emoji
+					"Segoe UI Emoji",// Windows emoji
+					"Segoe UI Symbol",// Windows emoji
+					"Noto Color Emoji";// Linux emoji
+	font-size:62.5%; //Makes font base = 10px = 1rem
+	line-height:1.15;// 2
+	-moz-tab-size:4;// 3
+	tab-size:4;// 4
+	-ms-text-size-adjust:100%;// 4
+	-webkit-text-size-adjust:100%;// 5
+	word-break:break-word;// 6
+	}
+	
+
+// Sections ========================================================================== 
+body {margin:0;}// Remove the margin in all browsers (opinionated).
+h1 {font-size:2em; margin:.67em 0;}// Correct the font size and margin on `h1` elements within `section` and `article` contexts in Chrome, Firefox, and Safari.
+
+// Grouping content ================================================================== 
+hr {
+	height:0;// 1. Add the correct sizing in Firefox.
+	overflow: visible;// 2. Show the overflow in Edge and IE.
+}
+main {display:block;}// Add the correct display in IE.
+nav ol,
+nav ul {list-style:none;}// Remove the list style on navigation lists in all browsers (opinionated).
+pre {font-family:	Menlo,// macOS 10.10+ //1. Use the default monospace user interface font in all browsers (opinionated).
+					Consolas,//Windows 6+ 
+					Roboto Mono,// Android 4+
+					Ubuntu Monospace,// Ubuntu 10.10+ 
+					Oxygen Mono,// KDE Plasma 4+ 
+					Liberation Mono,// Linux/OpenOffice fallback 
+					monospace;// fallback
+					font-size: 1em;// 2. Correct the odd `em` font sizing in all browsers.
+}
+
+// Text-level semantics ==============================================================
+a {background-color:transparent;}// Remove the gray background on active links in IE 10.
+abbr[title] {text-decoration:underline; text-decoration:underline dotted;}// Add the correct text decoration in Edge, IE, Opera, and Safari.
+b,
+strong {font-weight:bolder;}// Add the correct font weight in Chrome, Edge, and Safari.
+code,
+kbd,
+samp{font-family:	Menlo,// macOS 10.10+ 
+					Consolas,// Windows 6+ 
+					Roboto Mono,// Android 4+ 
+					Ubuntu Monospace,// Ubuntu 10.10+ 
+					Oxygen Mono,// KDE Plasma 4+
+					Liberation Mono,// Linux/OpenOffice fallback 
+					monospace;// Fallback - 1. Use the default monospace user interface font in all browsers (opinionated).
+					font-size:1em;// 2.Correct the odd `em` font sizing in all browsers. 
+} 
+small {font-size:80%;}// Add the correct font size in all browsers.
+::-moz-selection {
+	background-color: #b3d4fc;
+	color:#000;//Remove the text shadow on text selections in Firefox 61- (opinionated).
+	text-shadow:none;//Restore the coloring undone by defining the text shadow in all browsers (opinionated).
+}
+::selection {background-color:#b3d4fc;
+			color:#000; //1. Restore the coloring undone by defining the text shadow in all browsers (opinionated).
+			text-shadow:none; //Remove the text shadow on text selections in Firefox 61- (opinionated)
+}
+
+// Embedded content ==================================================================
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {vertical-align:middle;}// Change the alignment on media elements in all browers (opinionated).
+audio,
+video {display:inline-block;}// Add the correct display in IE 9-.
+audio:not([controls]) {display:none; height:0;}// Add the correct display in iOS 4-7.
+img {border-style:none;}// Remove the border on images inside links in IE 10-.
+svg {fill: currentColor;}// Change the fill color to match the text color in all browsers (opinionated).
+svg:not(:root) {overflow:hidden;}// Hide the overflow in IE
+
+// Tabular data ======================================================================
+table {border-collapse: collapse;}// Collapse border spacing in all browsers (opinionated).
+
+// Forms =============================================================================
+button,
+input,
+select,
+textarea {font-family:inherit; font-size:inherit; line-height:inherit;}// Inherit styling in all browsers (opinionated).
+button,
+input,
+select {margin:0;}// Remove the margin in Safari
+button {overflow:visible;// 1. Show the overflow in IE.
+		text-transform:none;// 2. Remove the inheritance of text transform in Edge, Firefox, and IE.
+}
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {-webkit-appearance:button;}// Correct the inability to style clickable types in iOS and Safari.
+fieldset {padding:.35em .75em .625em;}// Correct the padding in Firefox.
+input {overflow:visible;}// Show the overflow in Edge and IE.
+legend {color:inherit;// 2
+		display:table;//1. Correct the text wrapping in Edge and IE. 
+		max-width:100%;//1. Correct the text wrapping in Edge and IE. 
+		white-space:normal;//1. Correct the text wrapping in Edge and IE. 
+}
+progress {	display:inline-block;//1. Add the correct display in Edge and IE.
+			vertical-align:baseline;//2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
+}
+select {text-transform:none;}// Remove the inheritance of text transform in Firefox.
+textarea {	margin:0;// 1. Remove the margin in Firefox and Safari. 
+			overflow:auto;// 2. Remove the default vertical scrollbar in IE.
+			resize:vertical;// 3. Change the resize direction on textareas in all browsers (opinionated).
+}
+[type="checkbox"],
+[type="radio"] {padding:0;}// Remove the padding in IE 10-.
+[type="search"] {
+		-webkit-appearance: textfield;//1. Correct the odd appearance in Chrome and Safari.
+		outline-offset:-2px;//2. Correct the outline style in Safari.
+}
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {height:auto;}// Correct the cursor style of increment and decrement buttons in Safari.
+::-webkit-input-placeholder {color:inherit; opacity:.54;}// Correct the text style of placeholders in Chrome, Edge, and Safari.
+::-webkit-search-decoration {-webkit-appearance:none;}// Remove the inner padding in Chrome and Safari on macOS.
+::-webkit-file-upload-button {
+		-webkit-appearance:button;// 1. Correct the inability to style clickable types in iOS and Safari. 
+		font:inherit;// 2. Change font properties to `inherit` in Safari.
+}
+::-moz-focus-inner {border-style:none; padding:0;}// Remove the inner border and padding of focus outlines in Firefox.
+:-moz-focusring {outline: 1px dotted ButtonText;}// Restore the focus outline styles unset by the previous rule in Firefox.
+
+// Interactive =======================================================================
+details {display:block;}// Add the correct display in Edge and IE.
+dialog {background-color:#fff; border:solid; color:#000; display:block; height:-moz-fit-content; height:-webkit-fit-content; height:fit-content; left:0; margin:auto; padding:1em; position:absolute; right:0; width:-moz-fit-content; width:-webkit-fit-content; width:fit-content;}// Add the correct styles in Edge, IE, and Safari.
+dialog:not([open]) {display:none;}
+summary {display: list-item;}// Add the correct display in all browsers.
+
+// Scripting =========================================================================
+canvas {display:inline-block;}/* Add the correct display in IE 9-. */
+template {display:none;}/* Add the correct display in IE. */
+
+// User interaction ==================================================================
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea,
+[tabindex] {
+		-ms-touch-action:manipulation;// 1. Remove the tapping delay on clickable elements in all browsers (opinionated). 
+		touch-action:manipulation;// 2. Remove the tapping delay in IE 10. 
+}
+[hidden] {display:none;}// Add the correct display in IE 10-.
+
+// Accessibility =====================================================================
+[aria-busy="true"] {cursor:progress;}// Change the cursor on busy elements in all browsers (opinionated).
+[aria-controls] {cursor:pointer;}// Change the cursor on control elements in all browsers (opinionated).
+[aria-disabled],
+[disabled] {cursor:not-allowed;}// Change the cursor on disabled, not-editable, or otherwise inoperable elements in all browsers (opinionated).
+[aria-hidden="false"][hidden]:not(:focus) {clip:rect(0, 0, 0, 0); display:inherit; position:absolute;}// Change the display on visually hidden accessible elements in all browsers (opinionated).
