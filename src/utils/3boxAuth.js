@@ -5,10 +5,9 @@ import uuid from 'uuid/v1';
 // const profile = await Box.getProfile("0xf43321212844541463dDca19eb6377651445A5AE")
 // console.log(profile)
 
-const ethAccount = window.ethereum.enable();
-console.log(ethAccount);
-
 if (typeof window.ethereum !== 'undefined') {
+  const ethAccount = window.ethereum.enable();
+  console.log(ethAccount);
   // Ethereum user detected. You can now use the provider.
   const web3Provider = window.ethereum;
   console.log(web3Provider);

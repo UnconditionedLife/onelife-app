@@ -20,6 +20,12 @@ export default new Vuex.Store({
     updateImpacts(state, globalImpacts) {
       state.globalImpacts = globalImpacts;
     },
+    addImpact(state, impact) {
+      state.globalImpacts.push(impact);
+    },
+    removeImpact(state, impact) {
+      state.globalImpacts = state.globalImpacts.filter((i) => i.id !== impact.id);
+    },
   },
   actions: {
   },
