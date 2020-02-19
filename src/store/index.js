@@ -10,10 +10,10 @@ export default new Vuex.Store({
   mutations: {
     initializeStore(state) {
       // Check if the ID exists
-      if (localStorage.getItem('store')) {
+      if (window.localStorageHandler.getItem('store') !== null) {
       // Replace the state object with the stored item
         this.replaceState(
-          Object.assign(state, JSON.parse(localStorage.getItem('store'))),
+          Object.assign(state, JSON.parse(window.localStorageHandler.getItem('store'))),
         );
       }
     },
