@@ -13,8 +13,8 @@ if (typeof window.ethereum !== 'undefined') {
   console.log(web3Provider);
 }
 
-async function CreateBox(account, provider, spaces) {
-  const box = await Box.openBox(account, provider);
+async function CreateBox(account, provider, spaces, opts) {
+  const box = await Box.openBox(account, provider, opts);
   // const box = await Box.create(provider)
   await box.auth(spaces, { account });
   await box.syncDone;
