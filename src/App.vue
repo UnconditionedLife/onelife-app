@@ -1,18 +1,29 @@
 <template>
-  <div id="app">
-    <RouterView></RouterView>
+  <div v-show="$store.state.account" id="app">
+    <RouterView />
   </div>
 </template>
 
 <script>
-import CreateBox from '@/utils/3boxAuth';
-
 export default {
   async created() {
-    if (this.$store.state.globalImpacts.length === 0) {
-      const account = '0xaA1B8189DAbC2d55FbABBe3A0C99e4dA6969a2fD';
-      const globalImpacts = await CreateBox(account, window.ethereum, ['OneLife']);
-      this.$store.commit('updateImpacts', globalImpacts);
+    // when app started let's check metamask
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        // let's connect metamaks with the app
+        const ethAccount = await window.ethereum.enable();
+        this.$store.commit('updateAccount', ethAccount[0]);
+        console.log(ethAccount);
+
+        if (this.$store.state.globalImpacts.length === 0) {
+          // fetch global impacts from IPFS
+          const globalImpacts = await window.boxHandler.CreateBox(this.$store.state.account,
+            window.ethereum, [this.$store.state.appName]);
+          this.$store.commit('updateImpacts', globalImpacts);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   },
 };

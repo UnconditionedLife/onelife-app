@@ -5,26 +5,36 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    appName: '',
+    account: '',
     globalImpacts: [],
   },
   mutations: {
-    initializeStore(state) {
+    async initializeStore(state) {
       // Check if the ID exists
-      if (window.localStorageHandler.getItem('store') !== null) {
+      if (window.localStorageHandler.getItem('onlife-store') !== null) {
       // Replace the state object with the stored item
         this.replaceState(
-          Object.assign(state, JSON.parse(window.localStorageHandler.getItem('store'))),
+          Object.assign(state, JSON.parse(window.localStorageHandler.getItem('onlife-store'))),
         );
       }
+    },
+    updateAppName(state, appName) {
+      state.appName = appName;
+    },
+    updateAccount(state, account) {
+      state.account = account;
     },
     updateImpacts(state, globalImpacts) {
       state.globalImpacts = globalImpacts;
     },
-    addImpact(state, impact) {
+    async addImpact(state, impact) {
       state.globalImpacts.push(impact);
+      await window.boxHandler.updatePublicSpace(state.globalImpacts);
     },
-    removeImpact(state, impact) {
+    async removeImpact(state, impact) {
       state.globalImpacts = state.globalImpacts.filter((i) => i.id !== impact.id);
+      await window.boxHandler.updatePublicSpace(state.globalImpacts);
     },
   },
   actions: {

@@ -5,7 +5,7 @@
         :key="`impact-list-impact-${impact.id}`"
         @click="$store.commit('removeImpact', impact)">
           <div class="impact-list-impact-name"> {{ impact.name }} </div>
-          <div class="impact-list-impact-purpose"> {{ impact.purpose }} </div>
+          <div class="impact-list-impact-purpose"> {{ impact.impact }} </div>
       </li>
     </ul>
     <div v-else class="empty">No impacts</div>
