@@ -1,16 +1,32 @@
 import Box from '3box';
 import uuid from 'uuid/v1';
 
+// Structure of the OneLife 3box Table:
+// * public space
+// ** key: 'impact-list'
+// *** public information of all impacts
+// **** array of objects. E.g.: [{ name: 'OneLife Platform',
+// impact: 'Enabling people to make the impacts they desire.',id: uuid()}]
+// ** key: ''
+// ** key: ''
+// * private space
+// ** key: 'impact-<id>'
+// *** private information of a specific impact
+// **** object. E.g. {id: uuid(), contributors: [], pending_contributors[],
+// inivitatives: [], private_chat (?)}
+// ** key: ''
+// ** key: ''
+
 export default class BoxHandler {
   constructor(appName) {
     this.appName = appName;
     this.box = {};
     this.spaceName = 'impact-list';
+    this.privateSpaceName = 'dasda';
   }
 
   async CreateBox(account, provider, spaces, opts) {
     const box = await Box.openBox(account, provider, opts);
-    // const box = await Box.create(provider)
     await box.auth(spaces, { account });
     await box.syncDone;
     this.box = box;

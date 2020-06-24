@@ -166,15 +166,15 @@ $is-angle: type-of($value) == 'number' and index('deg' 'grad' 'turn' 'rad', unit
 @mixin build-anchor-rules($prefix:'') {
 	text-decoration: none;
 	cursor: pointer;
-	@include color(primary);
+	@include color(highlight);
 	@include font-weight(bold);
 
+	&:visited {
+		@include color(highlight);
+	}
 	&:hover,
 	&:focus,
 	&:active {
-		@include color(primary, dark);
-	}
-	&:visited {
 		@include color(primary);
 	}
 

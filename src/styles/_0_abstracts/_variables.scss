@@ -35,7 +35,7 @@
 	);
 
 	$brand-colors: (
-		'primary':		(light: _base-color-value(azure, light), regular: _base-color-value(azure), dark: _base-color-value(azure, dark), darker: _base-color-value(azure, darker)),
+		'primary':		(light: _base-color-value(purple, light), regular: _base-color-value(purple), dark: _base-color-value(azure, dark), darker: _base-color-value(azure, darker)),
 		'secondary':	(regular: _base-color-value(azure)),
 		'notification':	(regular: _base-color-value(red), dark: _base-color-value(red, dark), darker: _base-color-value(red, darker)),
 		'text':			(lighter:_base-color-value(grey), light:_base-color-value(grey, dark), regular: _base-color-value('black'), dark: _base-color-value('black'), darker: _base-color-value('black')),

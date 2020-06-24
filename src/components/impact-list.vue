@@ -2,10 +2,11 @@
   <div class="impact-list">
     <ul class="impact-list-list" v-if="$store.state.globalImpacts.length > 0">
       <li class="impact-list-impact" v-for="impact in $store.state.globalImpacts"
-        :key="`impact-list-impact-${impact.id}`"
-        @click="$store.commit('removeImpact', impact)">
-          <div class="impact-list-impact-name"> {{ impact.name }} </div>
-          <div class="impact-list-impact-purpose"> {{ impact.impact }} </div>
+        :key="`impact-list-impact-${impact.id}`">
+          <a :href="`/impact/${impact.id}`">
+            <div class="impact-list-impact-name"> {{ impact.name }} </div>
+            <div class="impact-list-impact-purpose"> {{ impact.impact }} </div>
+          </a>
       </li>
     </ul>
     <div v-else class="empty">No impacts</div>
@@ -29,26 +30,24 @@ export default {
       list-style-type: none;
 
       .impact-list-impact {
-        background: #6d3d6d;
+        @include background(background-secondary);
         border-radius: $spacer-1;
         padding: $spacer-2;
         cursor: pointer;
         margin: $spacer-2 0;
+        @include color(highlight);
 
         &:hover {
           opacity: 0.7;
-          text-decoration: line-through;
         }
 
         .impact-list-impact-name {
           font-weight: bold;
-          color: #fff;
           font-size: 1.2em;
         }
 
         .impact-list-impact-purpose {
           font-size: 0.9em;
-          color: #ddd;
         }
       }
     }
